@@ -27,7 +27,7 @@ window.PROYECTOS = [
     titulo: "Predicción de desistimiento de clientes (crédito)",
     categoria: "ml",
     resumen: "Modelo LightGBM end-to-end que estima la probabilidad de que un cliente desista de su solicitud de crédito, desplegado en Streamlit.",
-    metrica: "Recall 0.74",
+    metrica: "ROC-AUC 0.72",
     stack: ["Python", "LightGBM", "scikit-learn", "SHAP", "Streamlit"],
     imagen: "https://picsum.photos/seed/fm-desistimiento/1200/750",
     repo: "https://github.com/Fabio-data/Modelo-Desistimiento-de-clientes",
@@ -38,18 +38,18 @@ window.PROYECTOS = [
     problema:
       "En el proceso de solicitud de crédito, una parte de los clientes desiste antes de concretar. Sin una forma de anticipar quién está en riesgo, las acciones de retención llegan tarde y se aplican a ciegas.",
     solucion:
-      "Construí un modelo de clasificación con LightGBM, pipeline reproducible (ColumnTransformer + imputación + one-hot), manejo del desbalanceo con scale_pos_weight y umbral operativo optimizado sobre validación. El modelo se expone en una app de Streamlit donde se ingresa el cliente y devuelve probabilidad, nivel de riesgo y acción sugerida.",
+      "Construí un pipeline reproducible (ColumnTransformer + imputación + one-hot) con LightGBM, búsqueda de hiperparámetros optimizada por PR-AUC, manejo del desbalanceo con scale_pos_weight y calibración isotónica de probabilidades. Lo comparé contra baselines (Dummy y regresión logística) y lo desplegué en una app de Streamlit que devuelve probabilidad, nivel de riesgo y acción sugerida.",
     proceso: [
       "EDA y limpieza: valores faltantes, estados finales y definición de la variable objetivo (desiste / no desiste).",
       "Ingeniería de variables de negocio: capacidad de pago, ratio de endeudamiento, ratio solicitud/ingreso y estrés financiero.",
-      "Pipeline con ColumnTransformer + búsqueda de hiperparámetros (RandomizedSearchCV, 5-fold).",
-      "Ajuste del umbral por F1 sobre validación y evaluación final en test.",
+      "Pipeline con ColumnTransformer + RandomizedSearchCV optimizando PR-AUC, frente a baselines de referencia.",
+      "Calibración isotónica de probabilidades y umbral elegido por F1 en validación; evaluación final en test.",
       "Interpretabilidad con importancia de variables y SHAP; despliegue en Streamlit.",
     ],
     resultados: [
-      { valor: "0.74", etiqueta: "Recall en clientes que desisten" },
-      { valor: "0.58", etiqueta: "F1-score de la clase desiste" },
-      { valor: "0.41", etiqueta: "Umbral operativo optimizado" },
+      { valor: "0.72", etiqueta: "ROC-AUC en test" },
+      { valor: "0.70", etiqueta: "Recall en clientes que desisten" },
+      { valor: "0.61", etiqueta: "PR-AUC (baseline azar: 0.36)" },
     ],
     galeria: [],
   },
