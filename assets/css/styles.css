@@ -1,0 +1,117 @@
+/* =========================================================
+   Estilos personalizados — complementan a Tailwind
+   ========================================================= */
+
+/* Pesos exactos de Outfit */
+.font-600 { font-weight: 600; }
+
+/* --- Cuadrícula de fondo (fija, sin coste de scroll) --- */
+.grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 55% at 50% 0%, #000 35%, transparent 100%);
+          mask-image: radial-gradient(ellipse 75% 55% at 50% 0%, #000 35%, transparent 100%);
+}
+
+/* --- Aparición al hacer scroll (cascada escalonada) --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: calc(var(--index, 0) * 80ms);
+}
+
+/* --- Feedback táctil al pulsar (sin glow) --- */
+.btn-press {
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease, background-color 0.2s ease;
+}
+.btn-press:hover { transform: translateY(-1px); }
+.btn-press:active { transform: translateY(0) scale(0.985); }
+
+/* --- Filtro activo --- */
+.filtro-btn.is-active {
+  background-color: #4d7cfe;
+  border-color: #4d7cfe;
+  color: #0a0b0d;
+  font-weight: 600;
+}
+.filtro-btn:not(.is-active):hover {
+  color: #e8e9ec;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* --- Nav activo --- */
+.nav-link.is-active { color: #e8e9ec; }
+
+/* --- Tarjeta de proyecto --- */
+.proyecto-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+.proyecto-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(77, 124, 254, 0.5);
+}
+.proyecto-card .thumb img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.proyecto-card:hover .thumb img { transform: scale(1.05); }
+
+/* --- Barras del panel hero (micro-animación perpetua) --- */
+.bar {
+  transform-origin: bottom;
+  animation: barPulse 2.6s ease-in-out infinite;
+  animation-delay: calc(var(--i) * 0.18s);
+}
+@keyframes barPulse {
+  0%, 100% { transform: scaleY(0.78); }
+  50%      { transform: scaleY(1); }
+}
+
+/* --- Cursor parpadeante del "notebook" --- */
+.caret { animation: blink 1.1s steps(1) infinite; color: #4d7cfe; }
+@keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
+
+/* --- Botón flotante "volver arriba" --- */
+.to-top {
+  opacity: 0;
+  transform: translateY(12px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease, color 0.2s ease;
+}
+.to-top.is-shown {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* --- Scrollbar sutil --- */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0a0b0d; }
+::-webkit-scrollbar-thumb {
+  background: #23262d;
+  border-radius: 999px;
+  border: 2px solid #0a0b0d;
+}
+::-webkit-scrollbar-thumb:hover { background: #34384180; }
+
+/* --- Respeta "reducir movimiento" --- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}

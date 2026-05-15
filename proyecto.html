@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyecto — Fabio Andrés Marulanda</title>
+  <meta name="description" content="Detalle de proyecto de ciencia de datos." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night: '#0A0B0D', surface: '#101216', card: '#14171C',
+            line: 'rgba(255,255,255,0.08)', accent: '#4D7CFE',
+            ink: '#E8E9EC', muted: '#9A9CA3',
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            sans: ['Outfit', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          maxWidth: { content: '1200px' },
+        },
+      },
+    };
+  </script>
+  <!-- ?v= : súbelo (v=2, v=3...) cada vez que edites CSS/JS para evitar caché del navegador -->
+  <link rel="stylesheet" href="assets/css/styles.css?v=1" />
+</head>
+
+<body class="bg-night font-sans text-ink antialiased selection:bg-accent/30">
+
+  <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
+    <div class="grid-bg absolute inset-0"></div>
+  </div>
+
+  <!-- NAV -->
+  <header class="fixed inset-x-0 top-0 z-40 px-4 pt-4">
+    <nav class="mx-auto flex max-w-content items-center justify-between rounded-full border border-line bg-surface/70 px-5 py-2.5 backdrop-blur-xl">
+      <a href="index.html" class="flex items-center gap-2.5 text-[15px] font-semibold tracking-tight">
+        <span class="grid h-7 w-7 place-items-center rounded-md bg-accent/15 font-mono text-xs text-accent">FM</span>
+        Fabio Marulanda
+      </a>
+      <ul class="hidden items-center gap-8 text-[13px] text-muted lg:flex">
+        <li><a href="index.html#sobre-mi" class="transition-colors duration-200 hover:text-ink">Perfil</a></li>
+        <li><a href="index.html#skills" class="transition-colors duration-200 hover:text-ink">Stack</a></li>
+        <li><a href="index.html#proyectos" class="transition-colors duration-200 hover:text-ink">Proyectos</a></li>
+        <li><a href="index.html#contacto" class="transition-colors duration-200 hover:text-ink">Contacto</a></li>
+      </ul>
+      <a href="index.html#proyectos" class="btn-press rounded-full border border-line px-4 py-2 text-[13px] font-semibold text-ink transition-colors hover:border-white/25">
+        Volver
+      </a>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-content px-5 pb-24 pt-32">
+
+    <!-- ESTADO: no encontrado -->
+    <section id="noEncontrado" class="hidden py-24 text-center">
+      <p class="font-mono text-sm text-accent">// 404</p>
+      <h1 class="mt-4 font-display text-3xl font-600">Ese proyecto no existe</h1>
+      <p class="mt-3 text-muted">Quizá el enlace cambió. Vuelve al listado de proyectos.</p>
+      <a href="index.html#proyectos" class="btn-press mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-night">
+        Ver todos los proyectos
+      </a>
+    </section>
+
+    <!-- DETALLE (lo rellena proyecto.js) -->
+    <article id="detalle" class="hidden">
+      <!-- Breadcrumb -->
+      <nav class="reveal flex flex-wrap items-center gap-2 font-mono text-xs text-muted" aria-label="Migas de pan">
+        <a href="index.html" class="transition-colors hover:text-ink">Inicio</a>
+        <span>/</span>
+        <a href="index.html#proyectos" class="transition-colors hover:text-ink">Proyectos</a>
+        <span>/</span>
+        <span id="bcTitulo" class="text-ink"></span>
+      </nav>
+
+      <!-- Encabezado -->
+      <header class="reveal mt-8 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+        <div>
+          <span id="pCategoria" class="inline-block rounded-full border border-line px-3 py-1 font-mono text-[11px] text-accent"></span>
+          <h1 id="pTitulo" class="mt-5 font-display text-[2.2rem] font-600 leading-[1.1] tracking-tight sm:text-5xl"></h1>
+          <p id="pResumen" class="mt-5 max-w-[60ch] text-[15px] leading-relaxed text-muted sm:text-base"></p>
+          <div id="pStack" class="mt-6 flex flex-wrap gap-1.5 font-mono text-[11px] text-muted"></div>
+          <div id="pEnlaces" class="mt-7 flex flex-wrap gap-3"></div>
+        </div>
+        <div id="pMetrica" class="rounded-2xl border border-line bg-card p-7"></div>
+      </header>
+
+      <!-- Imagen principal -->
+      <div class="reveal mt-12 overflow-hidden rounded-2xl border border-line">
+        <img id="pImagen" src="" alt="" class="aspect-[16/8] w-full object-cover grayscale" />
+      </div>
+
+      <!-- Resultados -->
+      <section class="reveal mt-12">
+        <h2 class="font-mono text-[13px] text-accent">// resultados</h2>
+        <div id="pResultados" class="mt-5 grid grid-cols-1 divide-y divide-line border-y border-line sm:grid-cols-3 sm:divide-x sm:divide-y-0"></div>
+      </section>
+
+      <!-- Cuerpo -->
+      <div class="reveal mt-16 max-w-3xl space-y-12">
+        <section>
+          <h2 class="font-display text-xl font-600">El problema</h2>
+          <p id="pProblema" class="mt-4 leading-relaxed text-muted"></p>
+        </section>
+        <section>
+          <h2 class="font-display text-xl font-600">La solución</h2>
+          <p id="pSolucion" class="mt-4 leading-relaxed text-muted"></p>
+        </section>
+        <section>
+          <h2 class="font-display text-xl font-600">Proceso</h2>
+          <ol id="pProceso" class="mt-5 space-y-4"></ol>
+        </section>
+        <section id="pGaleriaWrap">
+          <h2 class="font-display text-xl font-600">Vistas del proyecto</h2>
+          <div id="pGaleria" class="mt-5 grid gap-5 sm:grid-cols-2"></div>
+        </section>
+      </div>
+
+      <!-- Navegación entre proyectos -->
+      <nav class="reveal mt-20 grid gap-4 border-t border-line pt-10 sm:grid-cols-2" aria-label="Más proyectos">
+        <a id="navPrev" href="#" class="btn-press group rounded-2xl border border-line bg-card p-6 transition-colors hover:border-white/25">
+          <p class="font-mono text-[11px] text-muted">Anterior</p>
+          <p class="mt-2 font-display font-600 transition-colors group-hover:text-accent" data-title></p>
+        </a>
+        <a id="navNext" href="#" class="btn-press group rounded-2xl border border-line bg-card p-6 text-right transition-colors hover:border-white/25">
+          <p class="font-mono text-[11px] text-muted">Siguiente</p>
+          <p class="mt-2 font-display font-600 transition-colors group-hover:text-accent" data-title></p>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="mx-auto flex max-w-content flex-col items-center justify-between gap-3 px-5 py-8 text-[13px] text-muted sm:flex-row">
+      <p>© <span id="year"></span> Fabio Andrés Marulanda · Analista y Científico de Datos</p>
+      <a href="index.html#proyectos" class="transition-colors hover:text-ink">Ver todos los proyectos</a>
+    </div>
+  </footer>
+
+  <script src="assets/js/proyectos-data.js?v=1"></script>
+  <script src="assets/js/proyecto.js?v=1"></script>
+</body>
+</html>

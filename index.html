@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fabio Andrés Marulanda — Analista y Científico de Datos</title>
+  <meta name="description" content="Portafolio de Fabio Andrés Marulanda, Analista y Científico de Datos: SQL, Power BI, Python, machine learning, forecasting, ETL y automatización de datos." />
+
+  <!-- Fuentes: Outfit (display/cuerpo) + JetBrains Mono (datos/números) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN (sin build, fácil de mantener) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            night:   '#0A0B0D',
+            surface: '#101216',
+            card:    '#14171C',
+            line:    'rgba(255,255,255,0.08)',
+            accent:  '#4D7CFE',
+            ink:     '#E8E9EC',
+            muted:   '#9A9CA3',
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            sans:    ['Outfit', 'sans-serif'],
+            mono:    ['"JetBrains Mono"', 'monospace'],
+          },
+          maxWidth: { content: '1200px' },
+        },
+      },
+    };
+  </script>
+
+  <!-- ?v= : súbelo (v=2, v=3...) cada vez que edites CSS/JS para evitar caché del navegador -->
+  <link rel="stylesheet" href="assets/css/styles.css?v=1" />
+</head>
+
+<body class="bg-night font-sans text-ink antialiased selection:bg-accent/30">
+
+  <!-- Cuadrícula de fondo (fija, sin coste de repintado al hacer scroll) -->
+  <div class="pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
+    <div class="grid-bg absolute inset-0"></div>
+  </div>
+
+  <!-- ============================ NAV ============================ -->
+  <header class="fixed inset-x-0 top-0 z-40 px-4 pt-4">
+    <nav class="mx-auto flex max-w-content items-center justify-between rounded-full border border-line bg-surface/70 px-5 py-2.5 backdrop-blur-xl">
+      <a href="#inicio" class="flex items-center gap-2.5 text-[15px] font-semibold tracking-tight">
+        <span class="grid h-7 w-7 place-items-center rounded-md bg-accent/15 font-mono text-xs text-accent">FM</span>
+        Fabio Marulanda
+      </a>
+
+      <ul class="hidden items-center gap-8 text-[13px] text-muted lg:flex">
+        <li><a href="#inicio" class="nav-link transition-colors duration-200 hover:text-ink">Inicio</a></li>
+        <li><a href="#sobre-mi" class="nav-link transition-colors duration-200 hover:text-ink">Perfil</a></li>
+        <li><a href="#experiencia" class="nav-link transition-colors duration-200 hover:text-ink">Experiencia</a></li>
+        <li><a href="#skills" class="nav-link transition-colors duration-200 hover:text-ink">Stack</a></li>
+        <li><a href="#proyectos" class="nav-link transition-colors duration-200 hover:text-ink">Proyectos</a></li>
+      </ul>
+
+      <a href="#contacto" class="btn-press hidden rounded-full bg-ink px-4 py-2 text-[13px] font-semibold text-night lg:inline-block">
+        Contactar
+      </a>
+
+      <button id="menuBtn" aria-label="Abrir menú" aria-expanded="false" class="btn-press grid h-9 w-9 place-items-center rounded-md border border-line lg:hidden">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
+
+    <div id="mobileMenu" class="mx-auto mt-2 hidden max-w-content rounded-2xl border border-line bg-surface/95 p-3 backdrop-blur-xl lg:hidden">
+      <ul class="flex flex-col gap-1 text-sm">
+        <li><a href="#inicio" class="block rounded-lg px-4 py-3 text-muted transition-colors hover:bg-white/5 hover:text-ink">Inicio</a></li>
+        <li><a href="#sobre-mi" class="block rounded-lg px-4 py-3 text-muted transition-colors hover:bg-white/5 hover:text-ink">Perfil</a></li>
+        <li><a href="#experiencia" class="block rounded-lg px-4 py-3 text-muted transition-colors hover:bg-white/5 hover:text-ink">Experiencia</a></li>
+        <li><a href="#skills" class="block rounded-lg px-4 py-3 text-muted transition-colors hover:bg-white/5 hover:text-ink">Stack</a></li>
+        <li><a href="#proyectos" class="block rounded-lg px-4 py-3 text-muted transition-colors hover:bg-white/5 hover:text-ink">Proyectos</a></li>
+        <li><a href="#contacto" class="block rounded-lg px-4 py-3 text-muted transition-colors hover:bg-white/5 hover:text-ink">Contacto</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================ HERO (asimétrico 7/5) ============================ -->
+    <section id="inicio" class="mx-auto grid min-h-[100dvh] max-w-content items-center gap-12 px-5 pb-16 pt-32 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pt-28">
+      <div>
+        <p class="reveal font-mono text-[13px] text-accent">// analista de datos · científico de datos</p>
+
+        <h1 class="reveal mt-5 font-display text-[2.6rem] font-600 leading-[1.05] tracking-tight sm:text-6xl lg:text-[4.2rem]">
+          Del dato a la
+          <span class="text-accent">decisión</span> y al
+          <span class="text-accent">modelo</span>.
+        </h1>
+
+        <p class="reveal mt-7 max-w-[60ch] text-[15px] leading-relaxed text-muted sm:text-base">
+          Soy <strong class="text-ink">Fabio Andrés Marulanda</strong>, Analista y Científico de Datos.
+          Combino SQL, Power BI y Python con machine learning y forecasting para convertir datos en
+          dashboards, análisis accionables y modelos predictivos que mejoran la toma de decisiones.
+        </p>
+
+        <div class="reveal mt-9 flex flex-wrap gap-3">
+          <a href="#proyectos" class="btn-press group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-night">
+            Ver proyectos
+            <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="CV_Fabio_Marulanda_analista.pdf" download class="btn-press inline-flex items-center gap-2 rounded-full border border-line px-6 py-3 text-sm font-semibold text-ink transition-colors hover:border-white/25">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
+            Descargar CV
+          </a>
+        </div>
+      </div>
+
+      <!-- Panel de datos: terminal con micro-animación perpetua -->
+      <div class="reveal" aria-hidden="true">
+        <div class="overflow-hidden rounded-2xl border border-line bg-card">
+          <div class="flex items-center gap-2 border-b border-line px-4 py-3">
+            <span class="h-2.5 w-2.5 rounded-full bg-white/15"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-white/15"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-white/15"></span>
+            <span class="ml-2 font-mono text-[11px] text-muted">ventas_kpi.sql</span>
+          </div>
+          <div class="space-y-1.5 px-5 py-5 font-mono text-[12.5px] leading-relaxed">
+            <p class="text-muted"><span class="text-accent">SELECT</span> region, <span class="text-accent">SUM</span>(ventas)</p>
+            <p class="text-muted"><span class="text-accent">FROM</span> hechos_ventas</p>
+            <p class="text-muted"><span class="text-accent">GROUP BY</span> region</p>
+            <p class="text-muted"><span class="text-accent">ORDER BY</span> 2 <span class="text-accent">DESC</span>;</p>
+            <p class="text-ink">→ dashboard Power BI<span class="caret">_</span></p>
+          </div>
+          <div class="flex items-end gap-1.5 border-t border-line px-5 py-5" role="presentation">
+            <span class="bar h-10 w-full rounded-sm bg-accent/25" style="--i:0"></span>
+            <span class="bar h-16 w-full rounded-sm bg-accent/40" style="--i:1"></span>
+            <span class="bar h-8 w-full rounded-sm bg-accent/20" style="--i:2"></span>
+            <span class="bar h-20 w-full rounded-sm bg-accent/60" style="--i:3"></span>
+            <span class="bar h-12 w-full rounded-sm bg-accent/30" style="--i:4"></span>
+            <span class="bar h-24 w-full rounded-sm bg-accent" style="--i:5"></span>
+            <span class="bar h-14 w-full rounded-sm bg-accent/35" style="--i:6"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ STATS (sin cards: líneas divisorias) ============================ -->
+    <section class="mx-auto max-w-content px-5 py-8">
+      <div class="reveal grid grid-cols-2 divide-y divide-line border-y border-line sm:grid-cols-4 sm:divide-x sm:divide-y-0">
+        <div class="px-2 py-7 sm:px-7">
+          <p class="font-mono text-3xl font-600 sm:text-4xl">5<span class="text-accent">+</span></p>
+          <p class="mt-2 text-[13px] text-muted">Años en análisis de datos</p>
+        </div>
+        <div class="px-2 py-7 sm:px-7">
+          <p class="font-mono text-3xl font-600 sm:text-4xl">3</p>
+          <p class="mt-2 text-[13px] text-muted">Empresas (Sodexo, Saferite, Sievert)</p>
+        </div>
+        <div class="px-2 py-7 sm:px-7">
+          <p class="font-mono text-3xl font-600 sm:text-4xl">6</p>
+          <p class="mt-2 text-[13px] text-muted">Proyectos destacados</p>
+        </div>
+        <div class="px-2 py-7 sm:px-7">
+          <p class="font-mono text-3xl font-600 sm:text-4xl">2</p>
+          <p class="mt-2 text-[13px] text-muted">Certificaciones en datos</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ PERFIL (zig-zag asimétrico) ============================ -->
+    <section id="sobre-mi" class="mx-auto max-w-content px-5 py-24">
+      <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-20">
+        <div class="reveal order-2 lg:order-1">
+          <div class="relative w-fit">
+            <!-- EDITA: reemplaza por tu foto en assets/img/perfil.jpg -->
+            <img src="https://picsum.photos/seed/fabio-marulanda-data/640/720" alt="Retrato de Fabio Andrés Marulanda"
+                 class="aspect-[4/5] w-full max-w-sm rounded-2xl border border-line object-cover grayscale" loading="lazy" />
+            <div class="absolute -bottom-5 -right-5 rounded-xl border border-line bg-card px-5 py-4">
+              <p class="font-mono text-xs text-muted">Medellín, Colombia</p>
+              <p class="mt-1 flex items-center gap-2 text-sm font-medium">
+                <span class="h-2 w-2 animate-pulse rounded-full bg-emerald-400"></span>
+                Abierto a oportunidades
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal order-1 lg:order-2">
+          <p class="font-mono text-[13px] text-accent">// perfil</p>
+          <h2 class="mt-4 font-display text-3xl font-600 tracking-tight sm:text-[2.5rem]">Entre el análisis de negocio y la ciencia de datos</h2>
+          <p class="mt-6 max-w-[62ch] leading-relaxed text-muted">
+            Analista de Datos con experiencia en SQL, Power BI, Python y automatización de procesos
+            (incluido Google Cloud), que transforma datos en dashboards, reportes y análisis
+            accionables para la toma de decisiones.
+          </p>
+          <p class="mt-4 max-w-[62ch] leading-relaxed text-muted">
+            En el lado de ciencia de datos, aplico machine learning y modelos de forecasting
+            (Scikit-learn) para estimar demanda y tendencias. Actualmente curso Ingeniería en
+            Ciencia de Datos en el Politécnico Colombiano Jaime Isaza Cadavid, profundizando en
+            estadística y modelado predictivo.
+          </p>
+
+          <ul class="mt-8 grid gap-x-8 gap-y-3 font-mono text-sm text-muted sm:grid-cols-2">
+            <li class="flex items-center gap-3"><span class="h-1 w-1 rounded-full bg-accent"></span> Machine learning & forecasting</li>
+            <li class="flex items-center gap-3"><span class="h-1 w-1 rounded-full bg-accent"></span> Modelado predictivo</li>
+            <li class="flex items-center gap-3"><span class="h-1 w-1 rounded-full bg-accent"></span> Dashboards & Business Intelligence</li>
+            <li class="flex items-center gap-3"><span class="h-1 w-1 rounded-full bg-accent"></span> ETL & automatización de datos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ EXPERIENCIA (timeline) ============================ -->
+    <section id="experiencia" class="mx-auto max-w-content px-5 py-24">
+      <div class="reveal max-w-2xl">
+        <p class="font-mono text-[13px] text-accent">// trayectoria</p>
+        <h2 class="mt-4 font-display text-3xl font-600 tracking-tight sm:text-[2.5rem]">Experiencia profesional</h2>
+      </div>
+
+      <ol class="mt-12 border-l border-line">
+        <li class="reveal relative pl-8 pb-12 last:pb-0">
+          <span class="absolute -left-[7px] top-1 h-3 w-3 rounded-full border-2 border-accent bg-night"></span>
+          <p class="font-mono text-xs text-accent">Feb 2026 — May 2026</p>
+          <h3 class="mt-2 font-display text-lg font-600">Analista de Datos y Big Data</h3>
+          <p class="font-mono text-sm text-muted">Sodexo</p>
+          <ul class="mt-4 space-y-2 text-sm leading-relaxed text-muted">
+            <li>Dashboards e informes en Power BI conectados a SharePoint para indicadores corporativos.</li>
+            <li>Documentación técnica de fuentes de datos: diccionarios de datos y flujos analíticos.</li>
+            <li>Reportes corporativos para apoyar la toma de decisiones de las áreas de negocio.</li>
+          </ul>
+        </li>
+        <li class="reveal relative pl-8 pb-12 last:pb-0">
+          <span class="absolute -left-[7px] top-1 h-3 w-3 rounded-full border-2 border-accent bg-night"></span>
+          <p class="font-mono text-xs text-accent">May 2023 — Ene 2026</p>
+          <h3 class="mt-2 font-display text-lg font-600">Data Analyst</h3>
+          <p class="font-mono text-sm text-muted">Saferite Solutions</p>
+          <ul class="mt-4 space-y-2 text-sm leading-relaxed text-muted">
+            <li>Informes automatizados desde la base de datos para diferentes departamentos.</li>
+            <li>Integraciones y bots que automatizaron flujos de datos entre el CRM y otras plataformas.</li>
+            <li>Web scraping masivo de precios y datos de mercado para análisis.</li>
+            <li>Modelos de forecasting de demanda y dashboards en Power BI y Looker Studio.</li>
+          </ul>
+        </li>
+        <li class="reveal relative pl-8 pb-12 last:pb-0">
+          <span class="absolute -left-[7px] top-1 h-3 w-3 rounded-full border-2 border-accent bg-night"></span>
+          <p class="font-mono text-xs text-accent">Feb 2021 — Ene 2023</p>
+          <h3 class="mt-2 font-display text-lg font-600">Analista de Datos</h3>
+          <p class="font-mono text-sm text-muted">Sievert S.A.S</p>
+          <ul class="mt-4 space-y-2 text-sm leading-relaxed text-muted">
+            <li>Gestión y estructuración de bases de datos para control de calidad radiológica.</li>
+            <li>Reportes automatizados y dashboards de indicadores operativos.</li>
+            <li>Automatización de la consolidación y validación de datos.</li>
+            <li>Capacitación a clínicas y hospitales en buenas prácticas y protección radiológica.</li>
+          </ul>
+        </li>
+      </ol>
+
+      <div class="reveal mt-6 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+        <div class="bg-card p-7">
+          <h3 class="font-mono text-[13px] text-accent">// educación</h3>
+          <p class="mt-3 font-display font-600">Ingeniería en Ciencia de Datos</p>
+          <p class="mt-1 text-sm text-muted">Politécnico Colombiano Jaime Isaza Cadavid · Feb 2025 — Actualidad</p>
+        </div>
+        <div class="bg-card p-7">
+          <h3 class="font-mono text-[13px] text-accent">// certificaciones</h3>
+          <p class="mt-3 text-sm text-muted">Diplomado Introducción al Análisis de Datos</p>
+          <p class="mt-1 text-sm text-muted">IBM Data Science Professional Certificate</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ STACK (bento asimétrico, sin 3 cards iguales) ============================ -->
+    <section id="skills" class="mx-auto max-w-content px-5 py-24">
+      <div class="reveal max-w-2xl">
+        <p class="font-mono text-[13px] text-accent">// stack técnico</p>
+        <h2 class="mt-4 font-display text-3xl font-600 tracking-tight sm:text-[2.5rem]">Herramientas que uso a diario</h2>
+      </div>
+
+      <div class="mt-12 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-6">
+        <!-- Tile grande -->
+        <div class="reveal bg-card p-8 sm:col-span-3 sm:row-span-2">
+          <div class="grid h-10 w-10 place-items-center rounded-lg bg-accent/15 text-accent">
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8 9l-4 3 4 3m8-6l4 3-4 3m-2-9l-4 12"/></svg>
+          </div>
+          <h3 class="mt-5 font-display text-lg font-600">Lenguajes, análisis & ciencia de datos</h3>
+          <p class="mt-2 max-w-[42ch] text-sm leading-relaxed text-muted">El núcleo de mi trabajo: consultar, limpiar, analizar y modelar datos para análisis y predicción.</p>
+          <div class="mt-6 flex flex-wrap gap-2 font-mono text-xs text-muted">
+            <span class="rounded-md border border-line px-2.5 py-1">Python</span>
+            <span class="rounded-md border border-line px-2.5 py-1">SQL</span>
+            <span class="rounded-md border border-line px-2.5 py-1">C++</span>
+            <span class="rounded-md border border-line px-2.5 py-1">Pandas</span>
+            <span class="rounded-md border border-line px-2.5 py-1">NumPy</span>
+            <span class="rounded-md border border-line px-2.5 py-1">Matplotlib</span>
+            <span class="rounded-md border border-line px-2.5 py-1">Seaborn</span>
+          </div>
+        </div>
+
+        <div class="reveal bg-card p-8 sm:col-span-3">
+          <h3 class="font-display font-600">Visualización & BI</h3>
+          <p class="mt-2 font-mono text-xs leading-relaxed text-muted">Power BI · Looker Studio</p>
+        </div>
+
+        <div class="reveal bg-card p-8 sm:col-span-3">
+          <h3 class="font-display font-600">Plataformas corporativas</h3>
+          <p class="mt-2 font-mono text-xs leading-relaxed text-muted">Microsoft Fabric · SharePoint</p>
+        </div>
+
+        <div class="reveal bg-card p-8 sm:col-span-2">
+          <h3 class="font-display font-600">Automatización & ETL</h3>
+          <p class="mt-2 font-mono text-xs leading-relaxed text-muted">ETL · n8n · Excel avanzado</p>
+        </div>
+        <div class="reveal bg-card p-8 sm:col-span-2">
+          <h3 class="font-display font-600">Machine Learning</h3>
+          <p class="mt-2 font-mono text-xs leading-relaxed text-muted">Scikit-learn · Forecasting · Modelado predictivo</p>
+        </div>
+        <div class="reveal bg-card p-8 sm:col-span-2">
+          <h3 class="font-display font-600">Estadística & Cloud</h3>
+          <p class="mt-2 font-mono text-xs leading-relaxed text-muted">Series temporales · Análisis estadístico · Google Cloud</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ PROYECTOS ============================ -->
+    <section id="proyectos" class="mx-auto max-w-content px-5 py-24">
+      <div class="reveal flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div class="max-w-xl">
+          <p class="font-mono text-[13px] text-accent">// portafolio</p>
+          <h2 class="mt-4 font-display text-3xl font-600 tracking-tight sm:text-[2.5rem]">Proyectos seleccionados</h2>
+          <p class="mt-4 text-muted">Problemas reales, decisiones medibles. Filtra por tipo de trabajo.</p>
+        </div>
+      </div>
+
+      <div id="filtros" class="reveal mt-9 flex flex-wrap gap-2" role="tablist" aria-label="Filtrar proyectos">
+        <button class="filtro-btn is-active rounded-full border border-line px-4 py-2 text-[13px] font-medium transition-colors" data-filter="todos">Todos</button>
+        <button class="filtro-btn rounded-full border border-line px-4 py-2 text-[13px] text-muted transition-colors" data-filter="viz">Visualización & BI</button>
+        <button class="filtro-btn rounded-full border border-line px-4 py-2 text-[13px] text-muted transition-colors" data-filter="auto">Automatización</button>
+        <button class="filtro-btn rounded-full border border-line px-4 py-2 text-[13px] text-muted transition-colors" data-filter="analisis">Análisis</button>
+        <button class="filtro-btn rounded-full border border-line px-4 py-2 text-[13px] text-muted transition-colors" data-filter="ml">Forecasting / ML</button>
+      </div>
+
+      <!-- La grilla se genera desde assets/js/main.js (edita el array PROYECTOS) -->
+      <div id="gridProyectos" class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+      <!-- Estado vacío (cuando un filtro no tiene resultados) -->
+      <div id="emptyState" class="hidden rounded-2xl border border-dashed border-line py-20 text-center">
+        <p class="font-mono text-sm text-muted">Sin proyectos en esta categoría todavía.</p>
+        <p class="mt-1 text-sm text-muted">Pronto habrá más.</p>
+      </div>
+    </section>
+
+    <!-- ============================ CONTACTO ============================ -->
+    <section id="contacto" class="mx-auto max-w-content px-5 py-24">
+      <div class="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div class="reveal">
+          <p class="font-mono text-[13px] text-accent">// contacto</p>
+          <h2 class="mt-4 font-display text-3xl font-600 tracking-tight sm:text-[2.5rem]">¿Tienes un problema con datos?</h2>
+          <p class="mt-6 max-w-[50ch] leading-relaxed text-muted">
+            Cuéntame el contexto y el resultado que buscas. Respondo en menos de 48 horas.
+          </p>
+
+          <div class="mt-9 flex flex-col gap-px overflow-hidden rounded-xl border border-line bg-line">
+            <a href="mailto:fabioandres226481@gmail.com" class="flex items-center gap-3 bg-card px-5 py-4 text-sm transition-colors hover:bg-white/5">
+              <svg class="h-4 w-4 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
+              fabioandres226481@gmail.com
+            </a>
+            <a href="https://github.com/Fabio-data" target="_blank" rel="noopener" class="flex items-center gap-3 bg-card px-5 py-4 text-sm transition-colors hover:bg-white/5">
+              <svg class="h-4 w-4 shrink-0 text-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 016 0C18 4.6 19 4.9 19 4.9c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+              github.com/Fabio-data
+            </a>
+            <a href="tel:+573108380377" class="flex items-center gap-3 bg-card px-5 py-4 text-sm transition-colors hover:bg-white/5">
+              <svg class="h-4 w-4 shrink-0 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.5 5.5C2.5 4 3.5 3 5 3h2l1.5 4-2 1.5a11 11 0 005 5L17 11l4 1.5V17c0 1.5-1 2.5-2.5 2.5A16 16 0 012.5 5.5z"/></svg>
+              +57 310 838 0377 · Medellín, Colombia
+            </a>
+          </div>
+        </div>
+
+        <!-- Formulario: label arriba, ayuda debajo, error inline, estado de envío -->
+        <form id="formContacto" class="reveal flex flex-col gap-5" novalidate>
+          <div class="flex flex-col gap-2">
+            <label for="nombre" class="text-sm font-medium">Nombre</label>
+            <input id="nombre" name="nombre" type="text" required autocomplete="name"
+                   class="rounded-xl border border-line bg-surface px-4 py-3 text-sm outline-none transition-colors focus:border-accent" placeholder="Cómo te llamas" />
+            <p class="hidden text-xs text-rose-400" data-error-for="nombre"></p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="email" class="text-sm font-medium">Correo</label>
+            <input id="email" name="email" type="email" required autocomplete="email"
+                   class="rounded-xl border border-line bg-surface px-4 py-3 text-sm outline-none transition-colors focus:border-accent" placeholder="tucorreo@dominio.com" />
+            <p class="text-xs text-muted" data-help-for="email">Lo uso solo para responderte.</p>
+            <p class="hidden text-xs text-rose-400" data-error-for="email"></p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <label for="mensaje" class="text-sm font-medium">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" rows="4" required
+                      class="resize-none rounded-xl border border-line bg-surface px-4 py-3 text-sm outline-none transition-colors focus:border-accent" placeholder="Contexto, datos disponibles y qué resultado buscas"></textarea>
+            <p class="hidden text-xs text-rose-400" data-error-for="mensaje"></p>
+          </div>
+
+          <button id="submitBtn" type="submit" class="btn-press inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm font-semibold text-night">
+            <span data-label>Enviar mensaje</span>
+            <svg data-spinner class="hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"/><path class="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8v3a5 5 0 00-5 5H4z"/></svg>
+          </button>
+          <p id="formMsg" class="hidden text-sm" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="mx-auto max-w-content px-5 py-8 text-center text-[13px] text-muted">
+      <p>© <span id="year"></span> Fabio Andrés Marulanda · Analista y Científico de Datos</p>
+    </div>
+  </footer>
+
+  <!-- Botón flotante: volver arriba -->
+  <a href="#inicio" id="toTop" aria-label="Volver arriba"
+     class="to-top btn-press fixed bottom-6 right-6 z-40 grid h-12 w-12 place-items-center rounded-full border border-line bg-surface/80 text-ink backdrop-blur-xl hover:border-accent/60 hover:text-accent">
+    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M6 11l6-6 6 6"/>
+    </svg>
+  </a>
+
+  <script src="assets/js/proyectos-data.js?v=1"></script>
+  <script src="assets/js/main.js?v=1"></script>
+</body>
+</html>
