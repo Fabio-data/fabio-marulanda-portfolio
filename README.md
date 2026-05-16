@@ -1,5 +1,7 @@
 # Portafolio — Ciencia de Datos
 
+**🌐 En vivo: https://fabio-marulanda-portfolio.vercel.app/**
+
 Portafolio web de una sola página, oscuro y moderno, para analista / científico de datos.
 Sin build, sin dependencias: HTML + Tailwind (CDN) + JavaScript puro.
 
