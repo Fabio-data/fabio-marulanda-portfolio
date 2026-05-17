@@ -31,7 +31,7 @@
     };
   </script>
   <!-- ?v= : súbelo (v=2, v=3...) cada vez que edites CSS/JS para evitar caché del navegador -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=1" />
+  <link rel="stylesheet" href="assets/css/styles.css?v=2" />
 </head>
 
 <body class="bg-night font-sans text-ink antialiased selection:bg-accent/30">
@@ -146,7 +146,22 @@
     </div>
   </footer>
 
+  <!-- Lightbox: ampliar imágenes del proyecto -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada" aria-hidden="true">
+    <button id="lbClose" class="lightbox__btn lightbox__close" type="button" aria-label="Cerrar (Esc)">
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <button id="lbPrev" class="lightbox__btn lightbox__nav lightbox__nav--prev" type="button" aria-label="Imagen anterior">
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <img id="lbImg" class="lightbox__img" src="" alt="" />
+    <button id="lbNext" class="lightbox__btn lightbox__nav lightbox__nav--next" type="button" aria-label="Imagen siguiente">
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></svg>
+    </button>
+    <p id="lbCount" class="lightbox__count" aria-live="polite"></p>
+  </div>
+
   <script src="assets/js/proyectos-data.js?v=5"></script>
-  <script src="assets/js/proyecto.js?v=1"></script>
+  <script src="assets/js/proyecto.js?v=2"></script>
 </body>
 </html>

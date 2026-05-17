@@ -38,6 +38,10 @@ if (idx === -1) {
   const img = document.getElementById("pImagen");
   img.src = p.imagen;
   img.alt = `Imagen principal del proyecto ${p.titulo}`;
+  img.classList.add("zoomable");
+  img.setAttribute("role", "button");
+  img.setAttribute("tabindex", "0");
+  img.setAttribute("aria-label", `Ampliar imagen principal del proyecto ${p.titulo}`);
 
   // Métrica destacada
   document.getElementById("pMetrica").innerHTML = `
@@ -90,11 +94,82 @@ if (idx === -1) {
     document.getElementById("pGaleria").innerHTML = galeria
       .map(
         (src, i) => `<div class="overflow-hidden rounded-xl border border-line">
-          <img src="${src}" alt="Vista ${i + 1} del proyecto ${p.titulo}" loading="lazy" class="aspect-[16/10] w-full object-cover grayscale" />
+          <img src="${src}" alt="Vista ${i + 1} del proyecto ${p.titulo}" loading="lazy"
+               class="zoomable aspect-[16/10] w-full object-cover grayscale"
+               role="button" tabindex="0"
+               aria-label="Ampliar vista ${i + 1} del proyecto ${p.titulo}" />
         </div>`
       )
       .join("");
   }
+
+  // --- Lightbox: clic para ampliar (imagen principal + galería) ---
+  const lbItems = [
+    { src: p.imagen, alt: `Imagen principal del proyecto ${p.titulo}` },
+    ...galeria.map((src, i) => ({ src, alt: `Vista ${i + 1} del proyecto ${p.titulo}` })),
+  ];
+
+  const lb = document.getElementById("lightbox");
+  const lbImg = document.getElementById("lbImg");
+  const lbCount = document.getElementById("lbCount");
+  const lbClose = document.getElementById("lbClose");
+  const lbPrev = document.getElementById("lbPrev");
+  const lbNext = document.getElementById("lbNext");
+  let lbIndex = 0;
+  let lbLastFocus = null;
+
+  lb.classList.toggle("is-single", lbItems.length <= 1);
+
+  function lbShow(i) {
+    lbIndex = (i + lbItems.length) % lbItems.length;
+    const it = lbItems[lbIndex];
+    lbImg.src = it.src;
+    lbImg.alt = it.alt;
+    lbCount.textContent = `${lbIndex + 1} / ${lbItems.length}`;
+  }
+  function lbOpen(i) {
+    lbLastFocus = document.activeElement;
+    lbShow(i);
+    lb.classList.add("is-open");
+    lb.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    lbClose.focus();
+  }
+  function lbHide() {
+    lb.classList.remove("is-open");
+    lb.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (lbLastFocus && lbLastFocus.focus) lbLastFocus.focus();
+  }
+  const lbIsOpen = () => lb.classList.contains("is-open");
+
+  lbClose.addEventListener("click", lbHide);
+  lbNext.addEventListener("click", () => lbShow(lbIndex + 1));
+  lbPrev.addEventListener("click", () => lbShow(lbIndex - 1));
+  lb.addEventListener("click", (e) => { if (e.target === lb) lbHide(); });
+
+  document.addEventListener("keydown", (e) => {
+    if (!lbIsOpen()) return;
+    if (e.key === "Escape") lbHide();
+    else if (e.key === "ArrowRight" && lbItems.length > 1) lbShow(lbIndex + 1);
+    else if (e.key === "ArrowLeft" && lbItems.length > 1) lbShow(lbIndex - 1);
+    else if (e.key === "Tab") {
+      const foco = [lbClose, lbItems.length > 1 ? lbPrev : null, lbItems.length > 1 ? lbNext : null].filter(Boolean);
+      e.preventDefault();
+      const actual = foco.indexOf(document.activeElement);
+      const paso = e.shiftKey ? -1 : 1;
+      foco[(actual + paso + foco.length) % foco.length].focus();
+    }
+  });
+
+  function bindZoom(el, i) {
+    el.addEventListener("click", () => lbOpen(i));
+    el.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); lbOpen(i); }
+    });
+  }
+  bindZoom(img, 0);
+  document.querySelectorAll("#pGaleria img").forEach((g, i) => bindZoom(g, i + 1));
 
   // Navegación anterior / siguiente (circular)
   const prev = PROYECTOS[(idx - 1 + PROYECTOS.length) % PROYECTOS.length];
