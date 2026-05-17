@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" width="1200" height="750" role="img" aria-label="Modelo de predicción de desistimiento de crédito: distribución de probabilidad, umbral de decisión y contribución de variables">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="riskFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9aa6c4" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#9aa6c4" stop-opacity="0.06"/>
+    </linearGradient>
+    <clipPath id="riskClip"><rect x="560" y="250" width="206" height="312"/></clipPath>
+    <style>
+      .mono{font-family:'JetBrains Mono','SFMono-Regular',Consolas,'Liberation Mono',monospace}
+      .disp{font-family:'Outfit','Segoe UI',system-ui,-apple-system,sans-serif}
+    </style>
+  </defs>
+
+  <!-- ground -->
+  <rect width="1200" height="750" fill="#0A0B0D"/>
+  <rect width="1200" height="750" fill="url(#grid)"/>
+  <rect x="40" y="40" width="1120" height="670" rx="18" fill="#101216" fill-opacity="0.55" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <!-- corner ticks -->
+  <g stroke="#E8E9EC" stroke-opacity="0.45" stroke-width="2" fill="none">
+    <path d="M64 92V64H92"/><path d="M1108 64h28v28"/>
+    <path d="M64 658v28h28"/><path d="M1136 658v28h-28"/>
+  </g>
+
+  <!-- header -->
+  <g class="mono">
+    <rect x="84" y="92" width="9" height="9" fill="#7f93c9"/>
+    <text x="104" y="101" font-size="15" fill="#9A9CA3" letter-spacing="1">// modelo de desistimiento de crédito</text>
+    <text x="1116" y="101" font-size="14" fill="#9A9CA3" text-anchor="end">LightGBM · scikit-learn · SHAP</text>
+  </g>
+  <text class="disp" x="84" y="158" font-size="42" font-weight="600" fill="#E8E9EC">Probabilidad de que un cliente</text>
+  <text class="disp" x="84" y="206" font-size="42" font-weight="600" fill="#E8E9EC">desista de su <tspan fill="#aab6d8">solicitud</tspan>.</text>
+
+  <!-- ===== distribution chart ===== -->
+  <g>
+    <!-- axis -->
+    <line x1="84" y1="562" x2="766" y2="562" stroke="#ffffff" stroke-opacity="0.18"/>
+    <g class="mono" font-size="12" fill="#6f727b">
+      <text x="84" y="586">0.0</text>
+      <text x="420" y="586" text-anchor="middle">P(desiste)</text>
+      <text x="766" y="586" text-anchor="end">1.0</text>
+    </g>
+
+    <!-- risk region (tail beyond threshold) -->
+    <g clip-path="url(#riskClip)">
+      <path d="M84 562 C 250 562 360 558 470 547 C 540 538 560 470 620 461 C 690 451 720 542 766 560 L766 562 Z" fill="url(#riskFill)"/>
+    </g>
+
+    <!-- density: no desiste -->
+    <path d="M84 562 C 176 562 232 332 320 332 C 410 332 470 520 560 549 C 640 557 700 560 766 561"
+          fill="none" stroke="#E8E9EC" stroke-opacity="0.85" stroke-width="2.5"/>
+    <!-- density: desiste -->
+    <path d="M84 562 C 250 562 360 558 470 547 C 540 538 560 470 620 461 C 690 451 720 542 766 560"
+          fill="none" stroke="#8ea0cf" stroke-width="2.5" stroke-dasharray="1 0"/>
+
+    <!-- decision threshold -->
+    <line x1="560" y1="250" x2="560" y2="562" stroke="#cfd6ea" stroke-width="1.5" stroke-dasharray="5 5"/>
+    <g class="mono">
+      <rect x="500" y="232" width="120" height="22" rx="5" fill="#14171C" stroke="#ffffff" stroke-opacity="0.12"/>
+      <text x="560" y="247" font-size="12" fill="#cfd6ea" text-anchor="middle">umbral · 0.42</text>
+    </g>
+
+    <!-- legend -->
+    <g class="mono" font-size="13" fill="#9A9CA3">
+      <rect x="84" y="612" width="14" height="3" fill="#E8E9EC"/>
+      <text x="106" y="619">no desiste</text>
+      <rect x="214" y="612" width="14" height="3" fill="#8ea0cf"/>
+      <text x="236" y="619">desiste</text>
+      <rect x="330" y="606" width="14" height="14" fill="url(#riskFill)"/>
+      <text x="352" y="619">clientes en riesgo</text>
+    </g>
+  </g>
+
+  <!-- ===== right rail: metrics ===== -->
+  <g transform="translate(820,250)">
+    <line x1="0" y1="-14" x2="0" y2="318" stroke="#ffffff" stroke-opacity="0.10"/>
+    <g class="mono">
+      <text x="28" y="6" font-size="13" fill="#9A9CA3">ROC-AUC · test</text>
+      <text class="disp" x="28" y="58" font-size="52" font-weight="600" fill="#E8E9EC">0.72</text>
+      <line x1="28" y1="86" x2="300" y2="86" stroke="#ffffff" stroke-opacity="0.10"/>
+
+      <text x="28" y="128" font-size="13" fill="#9A9CA3">Recall · clientes que desisten</text>
+      <text class="disp" x="28" y="180" font-size="52" font-weight="600" fill="#E8E9EC">0.70</text>
+      <line x1="28" y1="208" x2="300" y2="208" stroke="#ffffff" stroke-opacity="0.10"/>
+
+      <text x="28" y="250" font-size="13" fill="#9A9CA3">PR-AUC · azar = 0.36</text>
+      <text class="disp" x="28" y="302" font-size="52" font-weight="600" fill="#aab6d8">0.61</text>
+    </g>
+  </g>
+
+  <!-- ===== SHAP contribution bars ===== -->
+  <g transform="translate(84,632)" class="mono">
+    <text x="0" y="0" font-size="13" fill="#9A9CA3" letter-spacing="1">contribución de variables · SHAP</text>
+    <g font-size="12.5" fill="#c8cad1">
+      <!-- baseline axis -->
+      <line x1="250" y1="14" x2="250" y2="74" stroke="#ffffff" stroke-opacity="0.12"/>
+      <!-- row 1 -->
+      <text x="0" y="26">ratio_endeudamiento</text>
+      <rect x="250" y="18" width="0" height="0"/>
+      <rect x="250" y="17" width="172" height="10" rx="2" fill="#E8E9EC" fill-opacity="0.9"/>
+      <text x="430" y="26" fill="#9A9CA3">+0.31</text>
+      <!-- row 2 -->
+      <text x="0" y="44">capacidad_pago</text>
+      <rect x="142" y="35" width="108" height="10" rx="2" fill="#8ea0cf"/>
+      <text x="118" y="44" text-anchor="end" fill="#9A9CA3">-0.19</text>
+      <!-- row 3 -->
+      <text x="0" y="62">ratio_solicitud_ingreso</text>
+      <rect x="250" y="53" width="96" height="10" rx="2" fill="#E8E9EC" fill-opacity="0.7"/>
+      <text x="354" y="62" fill="#9A9CA3">+0.17</text>
+    </g>
+  </g>
+
+  <!-- footer tag -->
+  <g class="mono" font-size="13" fill="#6f727b">
+    <text x="1116" y="678" text-anchor="end">pipeline reproducible · calibración isotónica · Streamlit</text>
+  </g>
+</svg>
