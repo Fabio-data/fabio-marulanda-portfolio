@@ -29,7 +29,7 @@ window.PROYECTOS = [
     resumen: "Modelo LightGBM end-to-end que estima la probabilidad de que un cliente desista de su solicitud de crédito, desplegado en Streamlit.",
     metrica: "ROC-AUC 0.72",
     stack: ["Python", "LightGBM", "scikit-learn", "SHAP", "Streamlit"],
-    imagen: "https://picsum.photos/seed/fm-desistimiento/1200/750",
+    imagen: "assets/img/desistimiento-cover.svg",
     repo: "https://github.com/Fabio-data/Modelo-Desistimiento-de-clientes",
     demo: "https://modelo-desistimiento-de-clientes-gvdkeqyvdkx8gyfinsabmx.streamlit.app/",
     rol: "Científico de Datos (proyecto propio)",
@@ -51,7 +51,10 @@ window.PROYECTOS = [
       { valor: "0.70", etiqueta: "Recall en clientes que desisten" },
       { valor: "0.61", etiqueta: "PR-AUC (baseline azar: 0.36)" },
     ],
-    galeria: [],
+    galeria: [
+      "assets/img/desistimiento-roc.svg",
+      "assets/img/desistimiento-shap.svg",
+    ],
   },
   {
     slug: "dashboards-ventas-powerbi",

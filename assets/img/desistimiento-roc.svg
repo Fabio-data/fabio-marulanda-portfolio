@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 625" width="1000" height="625" role="img" aria-label="Curva ROC del modelo de desistimiento comparado contra baselines y tabla de métricas">
+  <defs>
+    <pattern id="g2" width="34" height="34" patternUnits="userSpaceOnUse">
+      <path d="M34 0H0V34" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+    <style>
+      .mono{font-family:'JetBrains Mono','SFMono-Regular',Consolas,monospace}
+      .disp{font-family:'Outfit','Segoe UI',system-ui,sans-serif}
+    </style>
+  </defs>
+
+  <rect width="1000" height="625" fill="#0A0B0D"/>
+  <rect width="1000" height="625" fill="url(#g2)"/>
+  <rect x="32" y="32" width="936" height="561" rx="16" fill="#101216" fill-opacity="0.5" stroke="#ffffff" stroke-opacity="0.08"/>
+
+  <g class="mono">
+    <rect x="60" y="64" width="9" height="9" fill="#7f93c9"/>
+    <text x="80" y="73" font-size="14" fill="#9A9CA3" letter-spacing="1">// evaluación · conjunto de test</text>
+  </g>
+  <text class="disp" x="60" y="116" font-size="30" font-weight="600" fill="#E8E9EC">Curva ROC: modelo vs. baselines</text>
+
+  <!-- plot frame -->
+  <g>
+    <line x1="110" y1="520" x2="620" y2="520" stroke="#ffffff" stroke-opacity="0.18"/>
+    <line x1="110" y1="520" x2="110" y2="150" stroke="#ffffff" stroke-opacity="0.18"/>
+    <g class="mono" font-size="12" fill="#6f727b">
+      <text x="110" y="546">0.0</text>
+      <text x="620" y="546" text-anchor="end">1.0</text>
+      <text x="365" y="566" text-anchor="middle">Tasa de falsos positivos</text>
+      <text x="96" y="524" text-anchor="end">0.0</text>
+      <text x="96" y="154" text-anchor="end">1.0</text>
+      <text x="74" y="338" text-anchor="middle" transform="rotate(-90 74 338)">Tasa de verdaderos positivos</text>
+    </g>
+
+    <!-- chance -->
+    <line x1="110" y1="520" x2="620" y2="150" stroke="#6f727b" stroke-width="1.5" stroke-dasharray="5 6"/>
+    <!-- logistic regression -->
+    <path d="M110 520 C 130 470 145 420 165 382 C 198 330 235 300 270 271 C 320 230 360 205 405 182 C 480 142 560 110 620 96"
+          fill="none" stroke="#8ea0cf" stroke-width="2.5"/>
+    <!-- model -->
+    <path d="M110 520 C 120 432 126 360 138 322 C 152 272 170 250 190 224 C 234 174 260 164 295 150 C 350 128 392 122 432 116 C 498 104 565 96 620 92"
+          fill="none" stroke="#E8E9EC" stroke-width="3"/>
+
+    <!-- legend -->
+    <g class="mono" font-size="13">
+      <rect x="360" y="470" width="248" height="92" rx="8" fill="#14171C" stroke="#ffffff" stroke-opacity="0.10"/>
+      <rect x="378" y="490" width="16" height="3" fill="#E8E9EC"/>
+      <text x="404" y="497" fill="#c8cad1">LightGBM · AUC 0.72</text>
+      <rect x="378" y="514" width="16" height="3" fill="#8ea0cf"/>
+      <text x="404" y="521" fill="#c8cad1">Reg. logística · AUC 0.66</text>
+      <rect x="378" y="536" width="16" height="3" fill="#6f727b"/>
+      <text x="404" y="543" fill="#c8cad1">Azar (Dummy) · AUC 0.50</text>
+    </g>
+  </g>
+
+  <!-- metrics table -->
+  <g transform="translate(672,168)" class="mono">
+    <line x1="0" y1="-14" x2="0" y2="352" stroke="#ffffff" stroke-opacity="0.10"/>
+    <text class="disp" x="28" y="6" font-size="16" font-weight="600" fill="#E8E9EC">Métricas (test)</text>
+    <g font-size="13" fill="#9A9CA3">
+      <text x="28" y="48">Modelo</text>
+      <text x="180" y="48" text-anchor="end">ROC</text>
+      <text x="252" y="48" text-anchor="end">PR</text>
+      <line x1="28" y1="60" x2="252" y2="60" stroke="#ffffff" stroke-opacity="0.10"/>
+    </g>
+    <g font-size="14">
+      <text x="28" y="90" fill="#E8E9EC">LightGBM</text>
+      <text x="180" y="90" text-anchor="end" fill="#E8E9EC">0.72</text>
+      <text x="252" y="90" text-anchor="end" fill="#E8E9EC">0.61</text>
+
+      <text x="28" y="124" fill="#9A9CA3">Reg. logística</text>
+      <text x="180" y="124" text-anchor="end" fill="#9A9CA3">0.66</text>
+      <text x="252" y="124" text-anchor="end" fill="#9A9CA3">0.52</text>
+
+      <text x="28" y="158" fill="#9A9CA3">Dummy</text>
+      <text x="180" y="158" text-anchor="end" fill="#9A9CA3">0.50</text>
+      <text x="252" y="158" text-anchor="end" fill="#9A9CA3">0.36</text>
+    </g>
+    <line x1="28" y1="186" x2="252" y2="186" stroke="#ffffff" stroke-opacity="0.10"/>
+    <g font-size="13" fill="#9A9CA3">
+      <text x="28" y="222">Recall desisten</text>
+      <text class="disp" x="252" y="226" text-anchor="end" font-size="22" font-weight="600" fill="#E8E9EC">0.70</text>
+      <text x="28" y="266">Umbral (F1 val.)</text>
+      <text class="disp" x="252" y="270" text-anchor="end" font-size="22" font-weight="600" fill="#E8E9EC">0.42</text>
+      <text x="28" y="310">Lift vs. azar</text>
+      <text class="disp" x="252" y="314" text-anchor="end" font-size="22" font-weight="600" fill="#aab6d8">1.7×</text>
+    </g>
+  </g>
+</svg>
